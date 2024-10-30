@@ -1,0 +1,189 @@
+.load {
+    position: fixed;
+    top: 38%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    margin: auto;
+}
+.load .circle {
+    position: fixed;
+    height: 130px;
+    opacity: 0;
+    transform: rotate(0deg);
+    animation-iteration-count: infinite;
+    animation-name: orbit;
+    animation-duration: 4.3s;
+}
+.load .circle:after {
+    content: '';
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    border-radius: 99%;
+    background: #fff;
+    box-shadow: 0 0 9px rgba(255, 255, 255, .7);
+}
+.load .circle:nth-child(2) {
+    animation-delay: 240ms;
+}
+.load .circle:nth-child(3) {
+    animation-delay: 480ms;
+}
+.load .circle:nth-child(4) {
+    animation-delay: 720ms;
+}
+.load .circle:nth-child(5) {
+    animation-delay: 960ms;
+}
+@keyframes orbit {
+    0% {
+        transform: rotate(225deg);
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    7% {
+        transform: rotate(345deg);
+        animation-timing-function: linear;
+    }
+    30% {
+        transform: rotate(455deg);
+        animation-timing-function: ease-in-out;
+    }
+    39% {
+        transform: rotate(690deg);
+        animation-timing-function: linear;
+    }
+    70% {
+        transform: rotate(815deg);
+        opacity: 1;
+        animation-timing-function: ease-out;
+    }
+    75% {
+        transform: rotate(945deg);
+        animation-timing-function: ease-out;
+    }
+    76% {
+        transform: rotate(945deg);
+        opacity: 0;
+    }
+    100% {
+        transform: rotate(945deg);
+        opacity: 0;
+    }
+}
+.ent {
+    background-color: #0000008a;
+   }
+A{display:inline-block;cursor:pointer;color:#ee6a6a;text-decoration:none}@keyframes shake{20%{transform:translateX(-3px)}40%{transform: translateX(3px)}60%{transform:translateX(-1px)}80%{transform: translateX(1px)}100%{transform:translateX(0px)}}*{-webkit-transition:all .4s ease-out;-moz-transition:all .4s ease-out;-ms-transition:all .4s ease-out;-o-transition:all .4s ease-out;transition:all .4s ease-out}
+body{direction: rtl;font-family:IRANSans;margin:0;
+    background: url(https://dl.natilos.ir/ffff/bg8.jpg) center top fixed #151515;
+    background-size: contain;
+    width: 100%;
+    ;color:#333}img{border:none}
+@font-face{font-family:IRANSans;font-style:normal;font-weight:400;src:url(litle.ttf) format("truetype")}
+
+.date{
+float: left;
+    font-size: 11px;
+    position: relative;
+    top: -10px;
+}
+
+.downs {
+    position: fixed;
+    bottom: 136px;
+    right: 19px;
+    background: #222e3a;
+    color: #effdde;
+    padding: 4px 11px;
+    border-radius: 99%;
+}
+.fa-angle-down {
+    font-size: 36px!important;
+}
+
+.padd{
+    height: 130px;
+}
+.fa-send{
+    position: absolute;
+}
+.fa-commenting{
+    position: absolute;
+}
+.fa-check,.fa-clock-o,.fa-check-circle{
+    position: absolute;
+    margin: -6px -15px;
+
+}
+.edif {display: none;
+    width: 100%;
+    color: #fff;
+    background: #212d3b87;
+    position: fixed;
+    bottom: 110px;
+    padding: 7px 16%;
+}
+
+.fa-edit{background: #90909078;
+    padding: 8px 6px 6px 10px;
+    cursor: pointer;
+    border-radius: 99%;
+    font-size: 20px!important;
+    right: 123%;
+    bottom: 6px;
+    position: absolute;}
+tr:nth-child(even) {background:#f3f7f8}
+tr:nth-child(odd) {background:#EBF1F4}
+.un1{background: #6c3378;
+    color: #effdde;
+    border-radius: 22px 22px 9px 22px;
+    width: 70%;
+    text-align: right;
+    padding: 10px 11px 6px 11px;
+    margin: 10px 9px 0 auto;
+}
+.clse{
+    cursor: pointer;
+    position: absolute;
+    right: 18px;
+    top: 1px;
+    font-size: 30px!important;
+}
+.un2{background: #222e3a;
+    color: #eaeaea;
+    border-radius: 22px;
+    width: 70%;
+    text-align: right;
+    padding: 10px 11px 6px 11px;
+    margin: 10px auto 0 9px;}
+
+.se{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    font-size: 28px;
+    background: #6c3378;
+    color: #fff;
+    width: 14%;
+    height: 112px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px -1px 10px 0px rgb(111 75 122);
+    justify-content: center;}
+textarea{
+outline: 0;
+    width: 86%;
+    height: 111px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: right;
+    padding: 7px ;
+    font-family: iransans;
+    border: 1px solid #7e3a7f;
+    color: #fff;
+    background: #212d3b;
+    box-shadow: 0px -1px 10px 0px rgb(111 75 122);
+    }
+

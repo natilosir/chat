@@ -1,0 +1,80 @@
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CHAT</title>
+<script>
+un1=$.cookie("f1");
+un2=$.cookie("f2");
+if(un1 && un2){
+$.ajax({
+    url: "api.php",
+    type: "POST",
+    dataType: "text",
+    data:{
+        un1: un1,
+        un2: un2,
+    },success: function(inputDataFromServer) {
+            json = $.parseJSON(inputDataFromServer);
+            f=json.length;
+        for (i=0;i<f;++i)
+        {   e= i+1;
+         u1=json[i].un1;
+if(u1==un1){he='un1';}
+else{he='un2';}
+$('#tex').append( "<div class='"+he+"'>"+json[i].text+"<div class='date'>"+json[i].date+"</div></div>");
+        }
+        $("#load").hide(999);
+    }
+
+});$("#cab").slideDown(1200); 
+$(document).ready(function(){
+$(".se").click(function(){texta=$('#dff').val();
+if(texta){$('#results #tex').slideDown(3000);
+$('#tex').append( "<div class='un1'>"+texta+"<div class='date'>همین الان</div></div>" );
+$('#dff').val("");
+$.post("api.php",
+    {
+        un1: un1,
+        un2: un2,
+        text: texta,
+    },);}$("body").scrollTop(999999);
+    });
+});
+
+setInterval(function() {
+$.ajax({
+    url: "api.php",
+    type: "POST",
+    dataType: "text",
+    data:{
+        un1: un1,
+        un2: un2,
+        upd: 'yes',
+    },success: function(inputDataFromServer) {
+            json = $.parseJSON(inputDataFromServer);
+            f=json.length;
+        for (i=0;i<f;++i)
+        {   e= i+1;
+         u1=json[i].un1;
+if(u1==un1){he='un1';}
+else{he='un2';}
+$('#tex').append( "<div class='"+he+"'>"+json[i].text+"<div class='date'>"+json[i].date+"</div></div>");
+        }
+$("body").scrollTop(999999);
+    }
+});
+}, 3000);
+
+
+}
+
+
+
+</script>
+<link href="gab.css?9a" type="text/css" rel="stylesheet"><center><div id="cab"style="display:none">
+
+<div id="results">
+<div id="tex"></div><div class="padd"></div>
+
+<textarea id="dff"></textarea><div class="se">ارسال</div>
+</div>
+
+</div><div id="load"><h1><img src="//natilos.ir/site/zimage/register/data/wpspin-2x.gif"> Loading</h1></div>
