@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket with jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div id="messages"></div>
+    <textarea id="messageInput" rows="4" cols="50"></textarea><br>
+    <button id="sendMessage">Send Message</button>
+
+    <script>
+        $(document).ready(function () {
+            const socket = new WebSocket('wss://chat.natilos.ir/websocket/');
+
+            socket.onopen = function() {
+                console.log('Connected to WebSocket server');
+                $('#messages').append('<p>Connected to WebSocket server</p>');
+            };
+
+            socket.onmessage = function(event) {
+                console.log('Message from server: ', event.data);
+                $('#messages').append('<p><strong>Server:</strong> ' + event.data + '</p>');
+            };
+
+            socket.onclose = function() {
+                console.log('Disconnected from WebSocket server');
+                $('#messages').append('<p>Disconnected from WebSocket server</p>');
+            };
+
+            $('#sendMessage').click(function() {
+                const message = $('#messageInput').val();
+                if (message.trim() !== '') {
+                    socket.send(message);
+                    $('#messages').append('<p><strong>You:</strong> ' + message + '</p>');
+                    $('#messageInput').val(''); // Clear textarea
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
