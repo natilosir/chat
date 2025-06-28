@@ -23,10 +23,10 @@ class time
         '29' => 'بیست‌و‌نهم', '30' => 'سی‌ام', '31' => 'سی‌و‌یکم',
     ];
 
-    private static $timezoneOffset = 12600;
+    private static $timezoneOffset = 0;
 
     // تابعی برای تنظیم منطقه زمانی
-    public static function Timezone($offset = 3.5)
+    public static function Timezone($offset = 0)
     {
         self::$timezoneOffset = $offset * 3600; // تبدیل ساعت به ثانیه
     }
@@ -40,7 +40,7 @@ class time
         list($gYear, $gMonth, $gDay) = explode('-', date('Y-m-d', $timestamp));
         list($jYear, $jMonth, $jDay) = self::ToJalali($gYear, $gMonth, $gDay);
 
-        $time                    = date('H:i:s', $timestamp);
+        $time = date('H:i:s', $timestamp);
 
         $jalaliDateTime = sprintf('%04d/%02d/%02d %s', $jYear, $jMonth, $jDay, $time);
 
@@ -54,11 +54,11 @@ class time
     // تابعی برای تبدیل تاریخ جلالی به تایم‌استمپ
     public static function tot($jalaliDate, $hours = null)
     {
-        list($datePart, $timePar)   = explode(' ', $jalaliDate) + [1 => '00:00:00'];
+        list($datePart, $timePar)    = explode(' ', $jalaliDate) + [1 => '00:00:00'];
         list($jYear, $jMonth, $jDay) = explode('/', $datePart);
         list($gYear, $gMonth, $gDay) = self::ToGregorian($jYear, $jMonth, $jDay);
-        $gregorianDate           = sprintf('%04d-%02d-%02d %s', $gYear, $gMonth, $gDay, $timePart);
-        $timestamp               = strtotime($gregorianDate);
+        $gregorianDate               = sprintf('%04d-%02d-%02d %s', $gYear, $gMonth, $gDay, $timePart);
+        $timestamp                   = strtotime($gregorianDate);
 
         return ($timestamp - self::$timezoneOffset) + ($hours * 3600); // اعمال جابجایی معکوس منطقه زمانی
     }

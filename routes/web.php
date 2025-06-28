@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\ChatController;
 
 Route::get('/login', 'AuthController@showLoginForm')->name('login');
 Route::post('/login', 'AuthController@login');
@@ -18,5 +15,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/CreateChat', 'IndexController@CreateNewChat');
     Route::post('/chats', 'ChatController@show');
     Route::post('/send', 'ChatController@send');
+    Route::post('/edit', 'ChatController@edit');
     Route::post('/load', 'ChatController@load');
 });

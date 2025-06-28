@@ -14,8 +14,8 @@ class SendRequest extends FormRequest
     public function rules()
     {
         return [
-            'receiver' => 'required|string|max:255',
-            'text' => 'required|string',
+            'receiver' => 'required|string|max:20|min:20',
+            'text'     => 'required|string',
         ];
     }
 }

@@ -14,7 +14,7 @@ class ShowRequest extends FormRequest
     public function rules()
     {
         return [
-            'receiver' => 'required|string|max:255',
+            'receiver' => 'required|string|max:20|min:20',
         ];
     }
 }

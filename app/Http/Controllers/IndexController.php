@@ -2,43 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\MessageRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-
-use App\User;
 use App\Chat;
-
+use App\Http\Requests\MessageRequest;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $user = Auth::user(); 
-        $chats = Chat::where('user_id', $user->id)->orderBy('updated_at', 'desc')->get(); 
+        $user  = Auth::user();
+        $chats = Chat::where('user_id', $user->id)->orderBy('updated_at', 'desc')->get();
 
         if ($chats->isEmpty()) {
-            $lastChat = null; 
+            $lastChat = null;
         } else {
-            $lastChat = User::where('username', $chats->first()->username)->first()->hash; 
+            $lastChat = User::where('username', $chats->first()->username)->first()->hash;
         }
 
         $chats = $chats->map(function ($message) {
-            $hash = User::where('username', $message->username)->first()->hash; 
+            $hash = User::where('username', $message->username)->first()->hash;
 
             return [
                 'username' => $message->username,
-                'hash' => $hash,
+                'hash'     => $hash,
             ];
         });
 
         return view('index', compact('user', 'chats', 'lastChat'));
     }
+
     public function CreateNewChat(MessageRequest $request)
     {
         $user = Auth::user();
 
-        if (!$user) {
+        if (! $user) {
             return response()->json(['error' => 'کاربر وارد نشده است.'], 401);
         }
 
@@ -48,8 +46,8 @@ class IndexController extends Controller
             return response()->json(['error' => 'میخوای با خودت حرف بزنی؟ کثخلی چیزی هستی؟'], 401);
         }
 
-        $UserExists = User::where('username', $username);
-        if (!$UserExists->exists()) {
+        $UserExists = User::where('username', $username)->first();
+        if (! $UserExists->exists()) {
             return response()->json(['error' => 'این نام کاربری در سیستم وجود ندارد.'], 404);
         }
 
@@ -60,15 +58,21 @@ class IndexController extends Controller
         }
 
         Chat::create([
-            'user_id' => $user->id,
+            'user_id'  => $user->id,
             'username' => $username,
         ]);
 
+        Chat::create([
+            'user_id'  => $UserExists->id,
+            'username' => $user->username,
+        ]);
+
         $hash = $UserExists->first()->hash;
+
         return response()->json(
             [
                 'success' => 'کاربر با موفقیت ایجاد شد',
-                'hash' => $hash
+                'hash'    => $hash,
             ], 200);
     }
 }
